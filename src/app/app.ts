@@ -1,14 +1,25 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, output, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { EncabezadoComponent } from './encabezado/encabezado.component';
 import { Usuario } from './usuario/usuario';
+import { USUARIOS_FALSOS } from './usuarios-falsos';
+import { Tareas } from './tareas/tareas';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, EncabezadoComponent, Usuario],
+  imports: [RouterOutlet, EncabezadoComponent, Usuario, Tareas],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('primera-app-angular');
+  usuarios = USUARIOS_FALSOS;
+  idUsuarioSeleccionado = signal('u1');
+
+  usuarioSeleccionado = computed(() =>
+    this.usuarios.find((u) => u.id === this.idUsuarioSeleccionado()),
+  );
+
+  alSeleccionarUsuario(id: string) {
+    this.idUsuarioSeleccionado.set(id);
+  }
 }
