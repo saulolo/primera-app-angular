@@ -1,14 +1,42 @@
-import { Component, input, output } from '@angular/core';
+import { Component, Input, input, output } from '@angular/core';
+import { Tarea } from './tarea/tarea';
 
 @Component({
   selector: 'app-tareas',
-  imports: [],
+  imports: [Tarea],
   templateUrl: './tareas.html',
   styleUrl: './tareas.css',
 })
 export class Tareas {
+  idUsuario = input.required<string>()
   //Signal input
   nombre = input.required<string>();
+  tareasFalses = [
+    {
+      id: 't1',
+      idUsuario: 'u1',
+      titulo: 'Dominar Angular',
+      resumen: 'Apreder todas las características básicas y avanzasAngular cómo apicarlas.',
+      expira: '2026-10-10',
+    },
+    {
+      id: 't2',
+      idUsuario: 'u3',
+      titulo: 'Crear el primer prototipo',
+      resumen: 'Crear el primer prototipo del sitio web de la tienda',
+      expira: '2026-11-15',
+    },
+    {
+      id: 't3',
+      idUsuario: 'u3',
+      titulo: 'Preparar la plantilla del carrito',
+      resumen: 'Preparar y describir una plantilla de carrito de compras de la tienda online',
+      expira: '2026-12-24',
+    },
+  ];
 
+  get tareasUsuarioSeleccionado() {
+    return this.tareasFalses.filter((tarea) => tarea.idUsuario === this.idUsuario());
+  }
 }
 

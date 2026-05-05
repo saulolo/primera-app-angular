@@ -1,10 +1,6 @@
 import { Component, computed, EventEmitter, Input, input, Output, output } from '@angular/core';
-
-interface User {
-  id: string;
-  avatar: string;
-  nombre: string;
-}
+import { type User } from './usuario.model';
+import type { ObjetoTarea } from '../tareas/tarea/tarea.model';
 
 /*type User = {
   id: string;
@@ -28,6 +24,7 @@ export class Usuario {
   //avatar = input.required<string>();
   //nombre = input.required<string>();
   seleccion = output<string>();
+  seleccionado = input.required<boolean>();
 
   /*  get rutaImagen() {
     return `/assets/usuarios/${this.avatar}`;
