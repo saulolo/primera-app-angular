@@ -1,16 +1,19 @@
-import { Component, Input, input, output } from '@angular/core';
+import { Component, Input, input, output, signal } from '@angular/core';
 import { Tarea } from './tarea/tarea';
+import { TareaNueva } from './tarea-nueva/tarea-nueva';
 
 @Component({
   selector: 'app-tareas',
-  imports: [Tarea],
+  imports: [Tarea, TareaNueva],
   templateUrl: './tareas.html',
   styleUrl: './tareas.css',
 })
 export class Tareas {
-  idUsuario = input.required<string>()
+  idUsuario = input.required<string>();
   //Signal input
   nombre = input.required<string>();
+  estaAgregandoTareaNueva = signal(false);
+
   tareasFalses = [
     {
       id: 't1',
@@ -38,5 +41,17 @@ export class Tareas {
   get tareasUsuarioSeleccionado() {
     return this.tareasFalses.filter((tarea) => tarea.idUsuario === this.idUsuario());
   }
+
+  alCompletarTarea(id: string) {
+    this.tareasFalses = this.tareasFalses.filter((tarea) => tarea.id !== id);
+  }
+
+  alIniciarNuevaTarea() {
+    this.estaAgregandoTareaNueva.update(v => !v);
+  };
+
+  alCancelarNuevaTarea() {
+    this.estaAgregandoTareaNueva.update(v => !v);
+  };
 }
 

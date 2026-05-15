@@ -7,7 +7,7 @@ import { Tareas } from './tareas/tareas';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, EncabezadoComponent, Usuario, Tareas],
+  imports: [EncabezadoComponent, Usuario, Tareas],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })

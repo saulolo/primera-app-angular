@@ -1,4 +1,4 @@
-import { Component, input, Input } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output, output } from '@angular/core';
 import { type ObjetoTarea } from './tarea.model';
 
 @Component({
@@ -9,4 +9,9 @@ import { type ObjetoTarea } from './tarea.model';
 })
 export class Tarea {
   tarea = input.required<ObjetoTarea>();
+  @Output() terminada = new EventEmitter<string>;
+
+  alCompletarTarea() {
+    this.terminada.emit(this.tarea().id);
+  }
 }
